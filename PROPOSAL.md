@@ -16,18 +16,11 @@ The core workflows that our project should run as a whole are being able to make
 know when their food will be ready for pickup, and to track the location and estimate time of when their food will arrive for delivery.
 
 ## Tuesday-Thursday Daily Goals
-#### Tuesday: A person should be able to make a reservation/order at a restaraunt the person chooses. Seth is going to start on the process of creating the reservation option
-for the Customer application. This will include allowing the customer to check the availibility of restaraunts, create reservations, and order their meal for that reservation.
-Joseph will create the database and what it allows for ("Name", "Party Count", "Date", "Time", "Order") and the restaraunt. Joseph will also create the reservation option
-for the Restaruant application. This will allow the restaraunt staff to view reservations, change menus, and say if they are available or not.
+#### Tuesday: A person should be able to make a reservation/order at a restaraunt the person chooses. Seth is going to start on the process of creating the reservation option for the Customer application. This will include allowing the customer to check the availibility of restaraunts, create reservations, and order their meal for that reservation. Joseph will create the database and what it allows for ("Name", "Party Count", "Date", "Time", "Order") and the restaraunt. Joseph will also create the reservation option for the Restaruant application. This will allow the restaraunt staff to view reservations, change menus, and say if they are available or not.
 
-#### Wednesday: A person should be able to order for carry-out at a restaraunt the person chooses. Seth is going to create the carry-out option for customers. This will allow
-them to schedule a time to pick up their food that they order. It will also give them an estimate of when it will be ready. Joseph will make the carry-out option for the
-Restaraunt application. This will let the staff view their current carry-out orders.
+#### Wednesday: A person should be able to order for carry-out at a restaraunt the person chooses. Seth is going to create the carry-out option for customers. This will allow them to schedule a time to pick up their food that they order. It will also give them an estimate of when it will be ready. Joseph will make the carry-out option for the restaraunt application. This will let the staff view their current carry-out orders.
 
-#### Thursday: A person should be able to order delivery. Seth will create the delivery option for the Customer application. This will allow them to schedule a delivery, order
-the food, and see a estimate of when it will arrive. Joseph will create the delivery option for the Restaraunt application. This will allow the staff to see their current delivery
-orders. If we are able to in time, we would also like to create a GUI for our application. This will provide some kind of visual aid instead of working purely through the terminal.
+#### Thursday: A person should be able to order delivery. Seth will create the delivery option for the Customer application. This will allow them to schedule a delivery, order the food, and see a estimate of when it will arrive. Joseph will create the delivery option for the Restaraunt application. This will allow the staff to see their current delivery orders. If we are able to in time, we would also like to create a GUI for our application. This will provide some kind of visual aid instead of working purely through the terminal.
 
 ## How will we use the content we covered this unit
 We will use databases to store data from the customers and allow the restaraunt staff to view that data. We will make classes out of those tables to interact with and change the data.
