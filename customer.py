@@ -32,7 +32,7 @@ def choose_times():
 def menu():
     cur.execute("SELECT * FROM Menu")
     for row in cur.fetchall():
-        print(f"Item: {row[0]}, Price: {row[1]}")
+        print(f"ID: {row[0]}, Item: {row[1]}, Price: {row[2]}")
 
 
 print("Welcome to Food Line! Home to all your restaraunt needs!")
@@ -63,23 +63,24 @@ if choice == "reservation":
             print(f"{times[key]}")
 
     chosen_time = input("\nWhat time would you like to schedule for?\n")
-    cur.execute(
-        "INSERT INTO Reservations VALUES (?, ?, ?, ?, ?)",
-        (name, count, chosen_date, chosen_time, None),
-    )
     menu()
     total = 0
     while True:
-        food_choice = input("What would you like to order?\n")
-        sqlStatement = f"SELECT Price FROM Menu WHERE Item = {food_choice}"
-        cur.execute(sqlStatement)
-        total += cur.fetchone()
-        choose_more = input("Would you like to add any more items?\n")
+        id_choice = input("\nChoose the ID of the item you want to order.\n")
+        sqlStatement = "SELECT Price FROM Menu WHERE ID = ?"
+        cur.execute(sqlStatement, [id_choice])
+        for price in cur.fetchall():
+            total += price[0]
+        print(f"\nYour total is currently {total:.2f}")
+        choose_more = input("\nWould you like to add any more items?\n")
         if choose_more.lower() == "y":
             menu()
         elif choose_more.lower() == "n":
             break
         else:
             print("Please choose a valid option")
-
+    cur.execute(
+        "INSERT INTO Reservations VALUES (?, ?, ?, ?, ?)",
+        (name, count, chosen_date, chosen_time, total),
+    )
     con.commit()
