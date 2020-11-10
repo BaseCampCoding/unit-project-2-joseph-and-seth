@@ -40,18 +40,9 @@ elif action.lower() == "availability":
         cur.execute('INSERT INTO Availability VALUES(0)')
         con.commit()
     else:
-        print("Please choose a valid option")
-else:
-    print("Please choose a valid option")
+       print("Please choose a valid option")
+elif action.lower() == "quit":
+    print("Shutting down.")       
+
     
 
-
-
-# def input_party_size(prompt: str) -> int:
-#     while True:
-#         response = input(prompt)
-#         if response.isdigit():
-#             response = int(response)
-#             if response >= 0:
-#                 return response
-#         print('Select a value of 1 or greater for the party size.')
