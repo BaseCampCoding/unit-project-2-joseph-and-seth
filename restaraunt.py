@@ -21,14 +21,17 @@ if action.lower() == "view":
         print(f"{row[0]}, {row[1]}, {row[2]}, {row[3]}, {row[4]}, {row[5]}")
         print('')
 elif action.lower() == "menu":
-    #view
-    cur.execute('SELECT * FROM Menu')
-    for row in cur.fetchall():
-        print(f"{row[0]}, {row[1]}")
-        print('')
+    choice = input("What option would you like to select?")
+    if choice.lower() == "view":
+        cur.execute('SELECT * FROM Menu')
+        print(cur.fetchall())
     #change 
-    if action.lower() == "add"
-    
+    elif action.lower() == "add":
+        item_id = input('What will be the ID of the new item?')
+        item_name = input('What will be the name of the new item?')
+        item_price = input('What will be the new price of the item?')
+        cur.execute('INSERT INTO Menu VALUES (?, ?, ?)', (item_id, item_name, item_price))
+
     #delete
 elif action.lower() == "availability":
     cur.execute('SELECT Available FROM Availability')
