@@ -6,7 +6,7 @@ cur = con.cursor()
 
 cur.execute('CREATE TABLE IF NOT EXISTS Reservations(Name TEXT, PartyCount INTEGER, Date timestamp, Time TIME, Total REAL)')
 
-cur.execute('CREATE TABLE IF NOT EXISTS Menu(ID INTEGER, Name TEXT, Price REAL)')
+cur.execute('CREATE TABLE IF NOT EXISTS Menu(ID INTEGER, Item TEXT, Price REAL)')
 cur.execute('''INSERT INTO Menu VALUES
     (0, 'Crispy Asparagus', 7.49),
     (1, 'Regular Spicy and Loaded Boneless Wings', 10.99),
