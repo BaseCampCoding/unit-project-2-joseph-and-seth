@@ -68,14 +68,11 @@ elif action.lower() == "menu":
 
 # The user can see the times available for a reservation.
 elif action.lower() == "availability":
-    cur.execute('SELECT * FROM ReservationTimes')
-    for row in cur.fetchall():
-        print(f"Date: {row[0]}, Time: {row[1]}")
 # The user can change what times and dates are available and are removed from the list or added back.
-    availability_choice = input("""What would you like to change about availability?
+    availability_choice = int(input("""What would you like to change about availability?
 [1] Set Availability
 [2] Provide new available times.
-    """)
+"""))
     if availability_choice == 1:
         cur.execute('SELECT Available FROM Availability')
         availability = cur.fetchone()
@@ -95,7 +92,9 @@ elif action.lower() == "availability":
         else:
             print("Please choose a valid option.")
     elif availability_choice == 2:     
-        print("")
+        cur.execute('SELECT * FROM ReservationTimes')
+        for row in cur.fetchall():
+            print(f"Date: {row[0]}, Time: {row[1]}")
 # Turns off the device. 
 elif action.lower() == "Shutdown":
     print("Shutting down.")       
