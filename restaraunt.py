@@ -1,5 +1,7 @@
 import sqlite3
 
+
+
 con = sqlite3.connect('restaraunt_1.db')
 cur = con.cursor()
 
@@ -19,10 +21,15 @@ if action.lower() == "view":
         print(f"{row[0]}, {row[1]}, {row[2]}, {row[3]}, {row[4]}, {row[5]}")
         print('')
 elif action.lower() == "menu":
+    #view
     cur.execute('SELECT * FROM Menu')
     for row in cur.fetchall():
         print(f"{row[0]}, {row[1]}")
         print('')
+    #change 
+    if action.lower() == "add"
+    
+    #delete
 elif action.lower() == "availability":
     cur.execute('SELECT Available FROM Availability')
     availability = cur.fetchone()
@@ -43,6 +50,5 @@ elif action.lower() == "availability":
        print("Please choose a valid option")
 elif action.lower() == "quit":
     print("Shutting down.")       
-
     
 
