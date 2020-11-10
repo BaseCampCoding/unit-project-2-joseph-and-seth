@@ -69,12 +69,30 @@ chilis_list = [
     (64, "Pepper Pals Grilled Chicken Bites", 4.99),
     (65, "Pepper Pals Cheese Burger Bites", 4.99),
 ]
+
+reservation_times = [
+    ('11/11/20', '8:00 p.m.'),
+    ('11/11/20', '5:00 p.m'),
+    ('11/14/20', '3:30 p.m'),
+    ('11/14/20', '6:30 p.m.'),
+    ('11/15/20', '9:00 p.m.'),
+    ('11/16/20', '4:00 p.m.'),
+    ('11/20/20', '6:30 p.m.'),
+    ('11/21/20', '12:00 p.m.'),
+    ('11/24/20', '1:00 p.m.'),
+    ('11/30/20', '11:00 p.m.'),
+]
+
 con = sqlite3.connect("restaraunt_1.db")
 cur = con.cursor()
 
 cur.execute(
     "CREATE TABLE IF NOT EXISTS Reservations(Name TEXT, PartyCount INTEGER, Date timestamp, Time TIME, Total REAL)"
 )
+
+cur.execute('CREATE TABLE IF NOT EXISTS ReservationTimes(Date timestamp, Time TIME')
+for row in reservation_times:
+    cur.execute("INSERT INTO ReservationTimes (?, ?)", row)
 
 cur.execute("CREATE TABLE IF NOT EXISTS Menu(ID INTEGER, Item TEXT, Price REAL)")
 for row in chilis_list:
