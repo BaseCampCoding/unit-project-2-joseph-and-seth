@@ -1,5 +1,7 @@
 import sqlite3
 
+
+
 con = sqlite3.connect('restaraunt_1.db')
 cur = con.cursor()
 
@@ -13,41 +15,40 @@ action = input('''Would you like to:
 - Quit the menu select [Quit]
 ''')
 
-if action == "View":
+if action.lower() == "view":
     cur.execute('SELECT * FROM Reservations')
     for row in cur.fetchall():
         print(f"{row[0]}, {row[1]}, {row[2]}, {row[3]}, {row[4]}, {row[5]}")
         print('')
-elif action == "Menu":
+elif action.lower() == "menu":
+    #view
     cur.execute('SELECT * FROM Menu')
     for row in cur.fetchall():
         print(f"{row[0]}, {row[1]}")
         print('')
+    #change 
+    if action.lower() == "add"
+    
+    #delete
 elif action.lower() == "availability":
     cur.execute('SELECT Available FROM Availability')
     availability = cur.fetchone()
-    if availability == True:
+    if availability == (1,):
         print("Reservations are currently available")
     else:
         print("Reservations are currently unavailable.")
     changed_availability = input("What would you like to set the availability to?")
     if changed_availability.lower() == "available":
+        cur.execute('DELETE FROM Availability')
         cur.execute('INSERT INTO Availability VALUES(1)')
+        con.commit()
     elif changed_availability.lower() == "unavailable":
+        cur.execute('DELETE FROM Availability')
         cur.execute('INSERT INTO Availability VALUES(0)')
+        con.commit()
     else:
-        print("Please choose a valid option")
-else:
-    print("HI")
+       print("Please choose a valid option")
+elif action.lower() == "quit":
+    print("Shutting down.")       
     
 
-
-
-# def input_party_size(prompt: str) -> int:
-#     while True:
-#         response = input(prompt)
-#         if response.isdigit():
-#             response = int(response)
-#             if response >= 0:
-#                 return response
-#         print('Select a value of 1 or greater for the party size.')
