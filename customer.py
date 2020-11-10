@@ -9,13 +9,17 @@ con = sqlite3.connect("restaraunt_1.db")
 cur = con.cursor()
 
 
-def random_dates():
-    global dates
+def random_date():
     start_dt = date.today().toordinal()
     end_dt = date(2020, 12, 31).toordinal()
     random_day = date.fromordinal(random.randint(start_dt, end_dt))
+    return random_day
+
+
+def random_dates():
+    global dates
     for i in range(10):
-        dates["Date %s" % i] = random_day
+        dates["Date %s" % i] = random_date()
     for key in dates:
         print(f"{dates[key]}")
 
