@@ -21,14 +21,27 @@ if action.lower() == "view":
         print(f"{row[0]}, {row[1]}, {row[2]}, {row[3]}, {row[4]}, {row[5]}")
         print('')
 elif action.lower() == "menu":
-    #view
-    cur.execute('SELECT * FROM Menu')
-    for row in cur.fetchall():
-        print(f"{row[0]}, {row[1]}")
-        print('')
-    #change 
-    if action.lower() == "add"
-    
+    choice = input("What option would you like to select?")
+    if choice.lower() == "view":
+        cur.execute('SELECT * FROM Menu')
+        for row in cur.fetchall():
+            print(f"ID: {row[0]}, Item: {row[1]}, Price: {row[2]}")
+    elif choice.lower() == "change":
+        id_number = input("What is the ID of the item you are changing?")
+        change_option = input("What value would you like to change?")
+        if change_option.lower() == "item":
+            new_name = input("What would you like to change this item's name to?")
+            cur.execute('UPDATE Menu SET Item = ? WHERE ID = ?', [new_name, id_number])
+            con.commit()
+        elif change_option.lower() == "price":
+            new_price = input("What would you like to change this item's price to?")
+            cur.execute('UPDATE Menu SET Price = ? WHERE ID = ?', [new_price, id_number])
+            con.commit()
+    elif action.lower() == "add":
+        item_id = input('What will be the ID of the new item?')
+        item_name = input('What will be the name of the new item?')
+        item_price = input('What will be the new price of the item?')
+        cur.execute('INSERT INTO Menu VALUES (?, ?, ?)', (item_id, item_name, item_price))
     #delete
 elif action.lower() == "availability":
     cur.execute('SELECT Available FROM Availability')
