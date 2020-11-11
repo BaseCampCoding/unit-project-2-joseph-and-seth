@@ -5,6 +5,7 @@ from colorama import Fore
 from colorama import Style
 from datetime import date
 from datetime import datetime
+from datetime import timedelta
 
 dates = {}
 items = []
@@ -28,9 +29,11 @@ def get_time():
 
 
 def delivery_time():
-    current_time = get_time()
-    time = random.randint(30, 120)
-    delivery_time = f"{(int(current_time[1]) + (time // 60))}:{(int(current_time[3]) + (time % 60))}"
+    current_time = datetime.now()
+    added_time = timedelta(minutes=random.randint(30, 65))
+    time = current_time + added_time
+    time = time.strftime("%H:%M")
+    delivery_time = f"{time}"
     print(f"Your estimated delivery time will be {delivery_time}")
     return delivery_time
 
