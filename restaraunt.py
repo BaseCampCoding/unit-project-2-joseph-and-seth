@@ -69,7 +69,7 @@ Total: ${row[4]}
 
     # If the user chooses menu they should have options of what they might want to do the the menu.
     elif action == 2:
-        While True:
+        while True:
             choice = int(
             input(
                 """What option would you like to select?:
