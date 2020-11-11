@@ -90,7 +90,7 @@ cur.execute(
     "CREATE TABLE IF NOT EXISTS Reservations(Name TEXT, PartyCount INTEGER, Date timestamp, Time TIME, Total REAL)"
 )
 
-cur.execute('CREATE TABLE IF NOT EXISTS ReservationTimes(Date timestamp, Time TIME)')
+cur.execute("CREATE TABLE IF NOT EXISTS ReservationTimes(Date timestamp, Time TIME)")
 for row in reservation_times:
     cur.execute("INSERT INTO ReservationTimes VALUES (?, ?)", row)
 
