@@ -6,6 +6,7 @@ cur = con.cursor()
 print(
     f"Welcome to {Fore.YELLOW}Food Line{Style.RESET_ALL}! Home to all your restaraunt needs!"
 )
+
 cur.execute("SELECT Available FROM Availability")
 availability = cur.fetchone()
 if availability == (1,):
