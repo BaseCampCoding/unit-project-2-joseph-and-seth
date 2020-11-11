@@ -1,49 +1,25 @@
-from datetime import date
-import random
-import sqlite3
-
-time_choices = ["4:00", "4:30", "5:00", "5:30", "6:00", "6:30", "7:00", "7:30", "8:00"]
-dates = {}
+from functions import *
 
 con = sqlite3.connect("restaraunt_1.db")
 cur = con.cursor()
 
-
-def random_date():
-    start_dt = date.today().toordinal()
-    end_dt = date(2020, 12, 31).toordinal()
-    random_day = date.fromordinal(random.randint(start_dt, end_dt))
-    return random_day
-
-
-def random_dates():
-    global dates
-    for i in range(10):
-        dates["Date %s" % i] = random_date()
-    for key in dates:
-        print(f"{dates[key]}")
-
-
-def choose_times():
-    random_times = random.choices(time_choices)
-    return random_times
-
-
-def menu():
-    cur.execute("SELECT * FROM Menu")
-    for row in cur.fetchall():
-        print(f"ID: {row[0]}, Item: {row[1]}, Price: {row[2]}")
-
-
-print("Welcome to Food Line! Home to all your restaraunt needs!")
+print(
+    f"Welcome to {Fore.YELLOW}Food Line{Style.RESET_ALL}! Home to all your restaraunt needs!"
+)
+cur.execute("SELECT Available FROM Availability")
+availability = cur.fetchone()
+if availability == (1,):
+    print(f"Reservations are currently {Fore.GREEN}available{Style.RESET_ALL}.")
+else:
+    print(f"Reservations are currently {Fore.RED}unavailable{Style.RESET_ALL}.")
 choice = input(
-    """Would you like to:
-- Make a [reservation]
-- Order [carry-out]
-- Schedule a [delivery]
+    f"""Would you like to:
+[1] Make a {Fore.BLUE}reservation{Style.RESET_ALL}
+[2] Order {Fore.RED}carry-out{Style.RESET_ALL}
+[3] Schedule a {Fore.YELLOW}delivery{Style.RESET_ALL}
 """
 )
-if choice == "reservation":
+if choice == "1" and availability == (1,):
     name = input("\nWhat is the name for this order?\n")
     count = input("\nWhat is the size of your party?\n")
     print("\nHere are our available dates.\n")
@@ -63,24 +39,33 @@ if choice == "reservation":
             print(f"{times[key]}")
 
     chosen_time = input("\nWhat time would you like to schedule for?\n")
-    menu()
-    total = 0
-    while True:
-        id_choice = input("\nChoose the ID of the item you want to order.\n")
-        sqlStatement = "SELECT Price FROM Menu WHERE ID = ?"
-        cur.execute(sqlStatement, [id_choice])
-        for price in cur.fetchall():
-            total += price[0]
-        print(f"\nYour total is currently {total:.2f}")
-        choose_more = input("\nWould you like to add any more items?\n")
-        if choose_more.lower() == "y":
-            menu()
-        elif choose_more.lower() == "n":
-            break
-        else:
-            print("Please choose a valid option")
+    total = menu_options()
+    order = json.dumps(items)
     cur.execute(
-        "INSERT INTO Reservations VALUES (?, ?, ?, ?, ?)",
-        (name, count, chosen_date, chosen_time, total),
+        "INSERT INTO Reservations VALUES (?, ?, ?, ?, ?, ?)",
+        (name, count, chosen_date2, chosen_time, order, total),
+    )
+    con.commit()
+elif choice == "1" and availability != (1,):
+    print("We're sorry, reservations are currently unavailable at this time.")
+elif choice == "2":
+    name = input("\nWhat is the name for this order?\n")
+    time = input("\nWhat time do you want to pick it up?\n")
+
+    total = menu_options()
+    order = json.dumps(items)
+
+    cur.execute("INSERT INTO Carryout VALUES (?, ?, ?)", (name, time, order, total))
+    con.commit()
+elif choice == "3":
+    name = input("What is the name for this order?")
+    address = input("What is the address you want to deliver to?")
+    delivery_time = delivery_time()
+    total = menu_options()
+    order = json.dumps(items)
+
+    cur.execute(
+        "INSERT INTO Delivery VALUES (?, ?, ?, ?)",
+        (name, address, delivery_time, order, total),
     )
     con.commit()
