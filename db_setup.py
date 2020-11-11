@@ -70,6 +70,55 @@ chilis_list = [
     (65, "Pepper Pals Cheese Burger Bites", 4.99),
 ]
 
+outbacksh_list = [
+    (0, "Bloomin' Onion", 8.99),
+    (1, "Aussie Cheese Fries Regular", 10.49),
+    (2, "Aussie Cheese Fries Small", 8.49),
+    (3, "Wings (Mild, Medium, Hot", 10.99),
+    (4, "Alice Springs Chicken Quesadillas", 10.49),
+    (5, "Seared Peppered Ahi", 12.49),
+    (6, "Wood-fire Grilled Shrimp on the Barbie", 10.49),
+    (7, "Coconut Shrimp", 9.99),
+    (8, "Aussie Signature Sampler", 11.99),
+    (9, "Bloom Petals", 4.49),
+    (10, "Alice Springs Chicken Quesadillas (Small)", 7.49),
+    (11, "Coconut Shrimp Small", 4.99),
+    (12, "Seared Peppered Ahi Small", 9.49),
+    (13, "Baked Potato Soup Cup", 4.49),
+    (14, "Baked Potato Soup Bowl", 5.99),
+    (15, "Chicken Tortilla Soup Cup", 4.49),
+    (16, "Chicken Tortilla Soup Bowl", 5.99),
+    (17, "French Onion Soup", 6.99),
+    (18, "Aussie Cobb Salad", 10.99),
+    (19, "Aussie Cobb Salad with chicken", 13.99),
+    (20, "Steakhouse Salad", 13.99),
+    (21, "Caesar Salad", 9.99),
+    (22, "Caesar Salad with chicken or shrimp", 12.99),
+    (23, "House Side Salad", 4.99),
+    (24, "Caesar Side Salad", 4.99),
+    (25, "Blue Cheese Wedge Side Salad", 5.99),
+    (26, "Blue Cheese Pecan Chopped Side Salad", 5.99),
+    (27, "Victoria's Filet Mignon 6oz", 22.99),
+    (28, "Victoria's Filet Mignon 9oz", 27.99),
+    (29, "New York Strip 14oz", 24.49),
+    (30, "Outback Center-cut Sirloin 6oz", 13.29),
+    (31, "Outback Center-cut Sirloin 8oz", 17.29),
+    (32, "Outback Center-cut Sirloin 11oz", 20.29),
+    (33, "T-Bone 22oz", 28.49),
+    (34, "Ribeye 10oz", 20.99),
+    (35, "Ribeye 14oz", 25.49),
+    (36, "Bone-in Natural Cut Ribeye", 28.99),
+    (37, "Slow-Roasted Prime Rib 8oz", 19.49),
+    (38, "Slow-Roasted Prime Rib 12oz", 22.49),
+    (39, "Slow-Roasted Prime Rib 16oz", 24.49),
+    (40, "Sirloin & Choice of Shrimp 8oz", 20.29),
+    (41, "Sirloin & Choice of Shrimp 11oz", 22.29),
+    (42, "Classic Tendrloin 9.75oz", 11.99),
+    (43, "Classic Tenderloin 13oz", 14.99)
+]
+
+
+
 reservation_times = [
     ("11/11/2020", "8:00 p.m."),
     ("11/11/2020", "5:00 p.m"),
@@ -109,3 +158,58 @@ cur.execute(
 cur.execute("CREATE TABLE IF NOT EXISTS Availability(Available INTEGER)")
 
 con.commit()
+con.close()
+
+con = sqlite3.connect('restaurant_2.db')
+cur = con.cursor()
+
+cur.execute(
+    "CREATE TABLE IF NOT EXISTS Reservations(Name TEXT, PartyCount INTEGER, Date timestamp, Time TIME, Items TEXT, Total REAL)"
+)
+
+cur.execute("CREATE TABLE IF NOT EXISTS ReservationTimes(Date timestamp, Time TIME)")
+for row in reservation_times:
+    cur.execute("INSERT INTO ReservationTimes VALUES (?, ?)", row)
+
+cur.execute("CREATE TABLE IF NOT EXISTS Menu(ID INTEGER, Item TEXT, Price REAL)")
+for row in texrh_list:
+    cur.execute("INSERT INTO Menu VALUES (?, ?, ?)", row)
+
+cur.execute(
+    "CREATE TABLE IF NOT EXISTS Carryout(Name TEXT, Time TIME, Items TEXT, Total REAL)"
+)
+
+cur.execute(
+    "CREATE TABLE IF NOT EXISTS Delivery(Name TEXT, Destination TEXT, DeliveryTime TIME, Items TEXT, Total REAL)"
+)
+
+cur.execute("CREATE TABLE IF NOT EXISTS Availability(Available INTEGER)")
+con.commit
+con.close()
+
+con = sqlite3.connect('restaurant_3.db')
+cur = con.cursor()
+
+cur.execute(
+    "CREATE TABLE IF NOT EXISTS Reservations(Name TEXT, PartyCount INTEGER, Date timestamp, Time TIME, Items TEXT, Total REAL)"
+)
+
+cur.execute("CREATE TABLE IF NOT EXISTS ReservationTimes(Date timestamp, Time TIME)")
+for row in reservation_times:
+    cur.execute("INSERT INTO ReservationTimes VALUES (?, ?)", row)
+
+cur.execute("CREATE TABLE IF NOT EXISTS Menu(ID INTEGER, Item TEXT, Price REAL)")
+for row in outbacksh_list:
+    cur.execute("INSERT INTO Menu VALUES (?, ?, ?)", row)
+
+cur.execute(
+    "CREATE TABLE IF NOT EXISTS Carryout(Name TEXT, Time TIME, Items TEXT, Total REAL)"
+)
+
+cur.execute(
+    "CREATE TABLE IF NOT EXISTS Delivery(Name TEXT, Destination TEXT, DeliveryTime TIME, Items TEXT, Total REAL)"
+)
+
+cur.execute("CREATE TABLE IF NOT EXISTS Availability(Available INTEGER)")
+con.commit()
+con.close()
