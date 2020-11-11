@@ -4,9 +4,11 @@ import random
 import sqlite3
 from colorama import Style
 from colorama import Fore
+import json
 
 time_choices = ["4:00", "4:30", "5:00", "5:30", "6:00", "6:30", "7:00", "7:30", "8:00"]
 dates = {}
+items = []
 
 con = sqlite3.connect("restaraunt_1.db")
 cur = con.cursor()
@@ -21,7 +23,7 @@ def menu():
     cur.execute("SELECT * FROM Menu")
     for row in cur.fetchall():
         print(
-            f"{Fore.BLUE}ID{Style.RESET_ALL}: {row[0]}, {Fore.YELLOW}Item{Style.RESET_ALL}: {row[1]}, Price: {row[2]}"
+            f"{Fore.BLUE}ID{Style.RESET_ALL}: {row[0]}, {Fore.YELLOW}Item{Style.RESET_ALL}: {row[1]}, {Fore.GREEN}Price{Style.RESET_ALL}: {row[2]}"
         )
 
 
@@ -48,6 +50,9 @@ def menu_options():
         cur.execute(sqlStatement, [id_choice])
         for price in cur.fetchall():
             total += price[0]
+        cur.execute("SELECT Item FROM Menu WHERE ID = ?", [id_choice])
+        for item in cur.fetchall():
+            items.append(item)
         print(f"\nYour total is currently {total:.2f}")
         choose_more = input("\nWould you like to add any more items?\n")
         if choose_more.lower() == "y":
@@ -99,9 +104,10 @@ if choice == "1" and availability == (1,):
 
     chosen_time = input("\nWhat time would you like to schedule for?\n")
     total = menu_options()
+    order = json.dumps(items)
     cur.execute(
-        "INSERT INTO Reservations VALUES (?, ?, ?, ?, ?)",
-        (name, count, chosen_date2, chosen_time, total),
+        "INSERT INTO Reservations VALUES (?, ?, ?, ?, ?, ?)",
+        (name, count, chosen_date2, chosen_time, order, total),
     )
     con.commit()
 elif choice == "1" and availability != (1,):
@@ -111,17 +117,19 @@ elif choice == "2":
     time = input("\nWhat time do you want to pick it up?\n")
 
     total = menu_options()
+    order = json.dumps(items)
 
-    cur.execute("INSERT INTO Carryout VALUES (?, ?, ?)", (name, time, total))
+    cur.execute("INSERT INTO Carryout VALUES (?, ?, ?)", (name, time, order, total))
     con.commit()
 elif choice == "3":
     name = input("What is the name for this order?")
     address = input("What is the address you want to deliver to?")
     delivery_time = delivery_time()
     total = menu_options()
+    order = json.dumps(items)
 
     cur.execute(
         "INSERT INTO Delivery VALUES (?, ?, ?, ?)",
-        (name, address, delivery_time, total),
+        (name, address, delivery_time, order, total),
     )
     con.commit()

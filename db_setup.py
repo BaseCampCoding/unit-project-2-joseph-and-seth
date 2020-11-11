@@ -87,7 +87,7 @@ con = sqlite3.connect("restaraunt_1.db")
 cur = con.cursor()
 
 cur.execute(
-    "CREATE TABLE IF NOT EXISTS Reservations(Name TEXT, PartyCount INTEGER, Date timestamp, Time TIME, Total REAL)"
+    "CREATE TABLE IF NOT EXISTS Reservations(Name TEXT, PartyCount INTEGER, Date timestamp, Time TIME, Items TEXT, Total REAL)"
 )
 
 cur.execute("CREATE TABLE IF NOT EXISTS ReservationTimes(Date timestamp, Time TIME)")
@@ -98,10 +98,12 @@ cur.execute("CREATE TABLE IF NOT EXISTS Menu(ID INTEGER, Item TEXT, Price REAL)"
 for row in chilis_list:
     cur.execute("INSERT INTO Menu VALUES (?, ?, ?)", row)
 
-cur.execute("CREATE TABLE IF NOT EXISTS Carryout(Name TEXT, Total REAL)")
+cur.execute(
+    "CREATE TABLE IF NOT EXISTS Carryout(Name TEXT, Time TIME, Items TEXT, Total REAL)"
+)
 
 cur.execute(
-    "CREATE TABLE IF NOT EXISTS Delivery(Name TEXT, Destination TEXT, Total REAL)"
+    "CREATE TABLE IF NOT EXISTS Delivery(Name TEXT, Destination TEXT, DeliveryTime, Items TEXT, Total REAL)"
 )
 
 cur.execute("CREATE TABLE IF NOT EXISTS Availability(Available INTEGER)")
