@@ -71,16 +71,16 @@ chilis_list = [
 ]
 
 reservation_times = [
-    ('11/11/2020', '8:00 p.m.'),
-    ('11/11/2020', '5:00 p.m'),
-    ('11/14/2020', '3:30 p.m'),
-    ('11/14/2020', '6:30 p.m.'),
-    ('11/15/2020', '9:00 p.m.'),
-    ('11/16/2020', '4:00 p.m.'),
-    ('11/20/2020', '6:30 p.m.'),
-    ('11/21/2020', '12:00 p.m.'),
-    ('11/24/2020', '1:00 p.m.'),
-    ('11/30/2020', '11:00 p.m.'),
+    ("11/11/2020", "8:00 p.m."),
+    ("11/11/2020", "5:00 p.m"),
+    ("11/14/2020", "3:30 p.m"),
+    ("11/14/2020", "6:30 p.m."),
+    ("11/15/2020", "9:00 p.m."),
+    ("11/16/2020", "4:00 p.m."),
+    ("11/20/2020", "6:30 p.m."),
+    ("11/21/2020", "12:00 p.m."),
+    ("11/24/2020", "1:00 p.m."),
+    ("11/30/2020", "11:00 p.m."),
 ]
 
 con = sqlite3.connect("restaraunt_1.db")
@@ -103,7 +103,7 @@ cur.execute(
 )
 
 cur.execute(
-    "CREATE TABLE IF NOT EXISTS Delivery(Name TEXT, Destination TEXT, DeliveryTime, Items TEXT, Total REAL)"
+    "CREATE TABLE IF NOT EXISTS Delivery(Name TEXT, Destination TEXT, DeliveryTime TIME, Items TEXT, Total REAL)"
 )
 
 cur.execute("CREATE TABLE IF NOT EXISTS Availability(Available INTEGER)")
