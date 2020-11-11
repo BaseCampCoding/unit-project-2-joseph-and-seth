@@ -6,6 +6,7 @@ cur = con.cursor()
 print(
     f"Welcome to {Fore.YELLOW}Food Line{Style.RESET_ALL}! Home to all your restaraunt needs!"
 )
+
 cur.execute("SELECT Available FROM Availability")
 availability = cur.fetchone()
 if availability == (1,):
@@ -23,20 +24,23 @@ if choice == "1" and availability == (1,):
     name = input("\nWhat is the name for this order?\n")
     count = input("\nWhat is the size of your party?\n")
     print("\nHere are our available dates.\n")
-
-    random_dates()
+    cur.execute("SELECT Date FROM ReservationTimes")
+    for row in cur.fetchall():
+        print(f"Date: {row[0]}")
 
     chosen_date = input("\nWhat date would you like to schedule for?\n")
-    split_dates = chosen_date.split("-")
-    chosen_date = date(int(split_dates[0]), int(split_dates[1]), int(split_dates[2]))
+    split_dates = chosen_date.split("/")
+    chosen_date2 = date(int(split_dates[2]), int(split_dates[0]), int(split_dates[1]))
 
     print("\nHere are available times.\n")
-    if chosen_date in dates.values():
-        times = {}
-        for i in range(6):
-            times["Time %s" % i] = choose_times()
-        for key in times:
-            print(f"{times[key]}")
+    cur.execute("SELECT Date FROM ReservationTimes")
+    for row in cur.fetchall():
+        if chosen_date in row:
+            cur.execute("SELECT Time FROM ReservationTimes")
+            for row in cur.fetchall():
+                print(f"Time: {row[0]}")
+
+    cur.execute("DELETE FROM ReservationTimes WHERE Date = ?", [chosen_date])
 
     chosen_time = input("\nWhat time would you like to schedule for?\n")
     total = menu_options()
