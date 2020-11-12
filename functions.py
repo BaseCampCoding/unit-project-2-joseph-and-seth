@@ -15,7 +15,7 @@ Yellow = Fore.YELLOW
 Green = Fore.GREEN
 Reset = Style.RESET_ALL
 
-con = sqlite3.connect("Chillis.db")
+con = sqlite3.connect("Chilis.db")
 cur = con.cursor()
 
 
