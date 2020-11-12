@@ -1,4 +1,5 @@
 import sqlite3
+from functions import menu
 
 
 # Asks the user which restaurant they work at.
@@ -25,7 +26,7 @@ while True:
     action = int(
         input(
             """Would you like to:
-- View queued reservations select [1]
+- View queued orders [1]
 - Change menu select [2]
 - Check availability for a guest/guests on the waiting list select [3]
 - Quit [4]
@@ -85,50 +86,62 @@ Total: ${row[4]}
     elif action == 2:
         while True:
             choice = int(
-            input(
-                """What option would you like to select?:
+                input(
+                    """What option would you like to select?:
 - View the current menu [1]
 - Change the current menu [2]
 - Add to the current menu [3]
 - Delete from the current menu [4]
 - Return to the main menu [5]
-"""))
-        # Should allow the user be able to see the current menu or changes to the menu.
-        if choice == 1:
-            while True:
-                cur.execute('SELECT * FROM Menu')
-                for row in cur.fetchall():
-                    print(f"ID: {row[0]}, Item: {row[1]}, Price: {row[2]}")
+"""
+                )
+            )
+            # Should allow the user be able to see the current menu or changes to the menu.
+            if choice == 1:
+                menu()
                 # Should allow the user to change the menu.
-                if choice == 2:
-                    id_number = input("What is the ID of the item you are changing? ")
-                    change_option = input("What value would you like to change? ")
+            if choice == 2:
+                id_number = input("What is the ID of the item you are changing? ")
+                change_option = input("What value would you like to change? ")
                 # The user can change the item
-                    if change_option.lower() == "item":
-                        new_name = input("What would you like to change this item's name to? ")
-                        cur.execute('UPDATE Menu SET Item = ? WHERE ID = ?', [new_name, id_number])
-                        con.commit()
-                # The user can change the price
-                    elif change_option.lower() == "price":
-                        new_price = input("What would you like to change this item's price to? ")
-                        cur.execute('UPDATE Menu SET Price = ? WHERE ID = ?', [new_price, id_number])
-                        con.commit()
-                # The user can add a new item, name of the item, and price of the item.
-                    elif choice == 3:
-                        item_id = input('What will be the ID of the new item? ')
-                        item_name = input('What will be the name of the new item? ')
-                        item_price = input('What will be the new price of the item? ')
-                        cur.execute('INSERT INTO Menu VALUES (?, ?, ?)', (item_id, item_name, item_price))
-                        con.commit()
-                # The user can delete an item.
-                elif choice == 4:
-                    del_item_id = input('What is the ID you want to delete? ')
-                    cur.execute('DELETE FROM Menu WHERE ID = ?', [del_item_id])
+                if change_option.lower() == "item":
+                    new_name = input(
+                        "What would you like to change this item's name to? "
+                    )
+                    cur.execute(
+                        "UPDATE Menu SET Item = ? WHERE ID = ?",
+                        [new_name, id_number],
+                    )
                     con.commit()
-                # The user can quit to the main menu.
-                elif choice == 5:
-                    print("Returning to the main menu.")
-                    break
+                # The user can change the price
+                elif change_option.lower() == "price":
+                    new_price = input(
+                        "What would you like to change this item's price to? "
+                    )
+                    cur.execute(
+                        "UPDATE Menu SET Price = ? WHERE ID = ?",
+                        [new_price, id_number],
+                    )
+                    con.commit()
+                # The user can add a new item, name of the item, and price of the item.
+            elif choice == 3:
+                item_id = input("What will be the ID of the new item? ")
+                item_name = input("What will be the name of the new item? ")
+                item_price = input("What will be the new price of the item? ")
+                cur.execute(
+                    "INSERT INTO Menu VALUES (?, ?, ?)",
+                    (item_id, item_name, item_price),
+                )
+                con.commit()
+            # The user can delete an item.
+            elif choice == 4:
+                del_item_id = input("What is the ID you want to delete? ")
+                cur.execute("DELETE FROM Menu WHERE ID = ?", [del_item_id])
+                con.commit()
+            # The user can quit to the main menu.
+            elif choice == 5:
+                print("Returning to the main menu.")
+                break
 
     # The user can see the times available for a reservation.
     elif action == 3:
