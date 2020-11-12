@@ -10,7 +10,7 @@ rest_choice = int(
     )
 )
 if rest_choice == 1:
-    con = sqlite3.connect("Chillis.db")
+    con = sqlite3.connect("Chilis.db")
     cur = con.cursor()
 elif rest_choice == 2:
     con = sqlite3.connect("Outback.db")

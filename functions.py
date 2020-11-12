@@ -15,9 +15,6 @@ Yellow = Fore.YELLOW
 Green = Fore.GREEN
 Reset = Style.RESET_ALL
 
-con = sqlite3.connect("Chillis.db")
-cur = con.cursor()
-
 
 def delivery_time():
     current_time = datetime.now()
@@ -30,6 +27,8 @@ def delivery_time():
 
 
 def menu1():
+    con = sqlite3.connect("Chilis.db")
+    cur = con.cursor()
     cur.execute("SELECT * FROM Menu")
     for row in cur.fetchall():
         print(
@@ -38,6 +37,8 @@ def menu1():
 
 
 def menu_options1():
+    con = sqlite3.connect("Chilis.db")
+    cur = con.cursor()
     menu1()
     total = 0
     while True:
@@ -51,22 +52,19 @@ def menu_options1():
             items.append(item)
         print(f"\nYour total is currently {total:.2f}")
         choose_more = input("\nWould you like to add any more items?\n")
-        if choose_more.lower() == "y" or "yes":
+        if choose_more.lower() == "y" or choose_more.lower() == "yes":
+            print("test")
             menu1()
-        elif choose_more.lower() == "n" or "no":
+        elif choose_more.lower() == "n" or choose_more.lower() == "no":
             break
         else:
             print("Please choose a valid option")
     return total
 
 
-con.close()
-
-con = sqlite3.connect("Outback.db")
-cur = con.cursor()
-
-
 def menu2():
+    con = sqlite3.connect("Outback.db")
+    cur = con.cursor()
     cur.execute("SELECT * FROM Menu")
     for row in cur.fetchall():
         print(
@@ -75,6 +73,8 @@ def menu2():
 
 
 def menu_options2():
+    con = sqlite3.connect("Outback.db")
+    cur = con.cursor()
     menu2()
     total = 0
     while True:
