@@ -162,7 +162,6 @@ outbacksh_list = [
 
 ]
 
-
 reservation_times = [
     ("11/11/2020", "8:00 p.m."),
     ("11/11/2020", "5:00 p.m"),
