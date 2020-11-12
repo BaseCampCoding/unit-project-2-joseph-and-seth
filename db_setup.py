@@ -114,9 +114,53 @@ outbacksh_list = [
     (40, "Sirloin & Choice of Shrimp 8oz", 20.29),
     (41, "Sirloin & Choice of Shrimp 11oz", 22.29),
     (42, "Classic Tendrloin 9.75oz", 11.99),
-    (43, "Classic Tenderloin 13oz", 14.99)
-]
+    (43, "Classic Tenderloin 13oz", 14.99),
+    (44, "Roasted Garlic Butter Style", 1.49),
+    (45, "Mushroom Marsala Style", 1.99),
+    (46, "Grilled Shrimp", 5.99),
+    (47, "Coconut Shrimp", 5.99),
+    (48, "Jumbo Lump Crab Cake", 7.99),
+    (49, "Grilled Lobster Tail", 10.99),
+    (50, "Steamed Lobster Tail", 10.99),
+    (51, "Aussie Steak Tacos", 10.99),
+    (52, "Aussie Fish Tacos", 11.99),
+    (53, "Aussie Chicken Tacos", 10.99),
+    (54, "The Bloomin' Burger", 10.49),
+    (55, "The Outback Burger", 9.49),
+    (56, "Grass-Fed Burger with Aged Cheddar", 12.49),
+    (57, "Double Burger", 11.49),
+    (58, "Crispy Chicken Sandwich", 10.99),
+    (59, "Bacon-Bourbon Salmon 7oz", 16.99),
+    (60, "Bacon-Bourbon Salmon 10oz", 18.99),
+    (61, "Perfectly Grilled Salmon 7oz", 15.99),
+    (62, "Perfectly Grilled Salmon 10oz", 17.99),
+    (63, "Tilapia with Pure Lump Crab Meat", 16.99),
+    (64, "Hand-Breaded Shrimp", 14.99),
+    (65, "Crab Cakes", 19.99),
+    (66, "Lobster Tails", 26.49),
+    (67, "Parmesan-Herb Crusted Chicken", 14.99),
+    (68, "Grilled Chicken on the Barbie", 13.99),
+    (69, "Alice Springs Chicken", 15.99),
+    (70, "Chicken Tender Platter", 12.99),
+    (71, "Baby Back Ribs Full Order", 21.49),
+    (72, "Baby Back Ribs Half Order", 16.99),
+    (73, "Pork Porterhouse", 14.99),
+    (74, "New Zealand Lamb", 22.49),
+    (75, "Homestyle Mashed Potatoes, Aussie Fries, Baked Potato, & Sweet Potato", 2.99),
+    (76, "Fresh Seasonal Mixed Veggies, Fresh Steamed Broccoli, & Sauteed Mushrooms", 2.99),
+    (77, "Baked Potato & Chicken Tortilla Soup Cup", 4.49),
+    (78, "Steakhouse Mac & Cheese", 4.99),
+    (79, "Broccoli & Cheese", 3.99),
+    (80, "Loaded Mashed Potatoes", 3.99),
+    (81, "Grilled Asparagus", 3.99),
+    (82, "Chocolate Thunder from Down Under", 7.99),
+    (83, "New York-Style Cheesecake", 6.99),
+    (84, "Salted Caramel Topped Cheesecake", 7.99),
+    (85, "Triple-Layer Carrot Cake", 6.99),
+    (86, "Salted Caramel Cookie Skillet", 4.99),
+    (87, "Double Chocolate or Seasonal Parfaits", 4.99),
 
+]
 
 
 reservation_times = [
@@ -160,34 +204,8 @@ cur.execute("CREATE TABLE IF NOT EXISTS Availability(Available INTEGER)")
 con.commit()
 con.close()
 
+
 con = sqlite3.connect('restaurant_2.db')
-cur = con.cursor()
-
-cur.execute(
-    "CREATE TABLE IF NOT EXISTS Reservations(Name TEXT, PartyCount INTEGER, Date timestamp, Time TIME, Items TEXT, Total REAL)"
-)
-
-cur.execute("CREATE TABLE IF NOT EXISTS ReservationTimes(Date timestamp, Time TIME)")
-for row in reservation_times:
-    cur.execute("INSERT INTO ReservationTimes VALUES (?, ?)", row)
-
-cur.execute("CREATE TABLE IF NOT EXISTS Menu(ID INTEGER, Item TEXT, Price REAL)")
-for row in texrh_list:
-    cur.execute("INSERT INTO Menu VALUES (?, ?, ?)", row)
-
-cur.execute(
-    "CREATE TABLE IF NOT EXISTS Carryout(Name TEXT, Time TIME, Items TEXT, Total REAL)"
-)
-
-cur.execute(
-    "CREATE TABLE IF NOT EXISTS Delivery(Name TEXT, Destination TEXT, DeliveryTime TIME, Items TEXT, Total REAL)"
-)
-
-cur.execute("CREATE TABLE IF NOT EXISTS Availability(Available INTEGER)")
-con.commit
-con.close()
-
-con = sqlite3.connect('restaurant_3.db')
 cur = con.cursor()
 
 cur.execute(
