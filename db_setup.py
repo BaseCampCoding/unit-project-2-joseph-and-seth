@@ -178,7 +178,7 @@ reservation_times = [
     ("11/30/2020", "11:00 p.m."),
 ]
 
-con = sqlite3.connect("Chillis.db")
+con = sqlite3.connect("Chilis.db")
 cur = con.cursor()
 
 cur.execute(
