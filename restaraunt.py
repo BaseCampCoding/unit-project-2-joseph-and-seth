@@ -1,14 +1,15 @@
 import sqlite3
 from functions import menu1
 from functions import menu2
+from variables import *
 
 
 # Asks the user which restaurant they work at.
 rc = int(
     input(
-        """Select which restaurant you work at:
-- Chili's [1]
-- Outback Steakhouse [2]
+        f"""Select which {Blue}restaurant{Reset} you work at:
+[1] {Red}Chili's{Reset}
+[2] {Yellow}Outback Steakhouse{Reset}
 """
     )
 )
@@ -23,14 +24,14 @@ elif rc == 2:
 
 # Presents user with menu options of what they can do.
 while True:
-    print("Food Line Staff Menu")
+    print(f"{Yellow}Food Line{Reset} Staff Menu")
     action = int(
         input(
-            """Would you like to:
-- View queued orders [1]
-- Change menu select [2]
-- Check availability for a guest/guests on the waiting list select [3]
-- Quit [4]
+            f"""Would you like to:
+[1] View queued {Yellow}orders
+[2] Change {Blue}menu{Reset} select
+[3] Check {Green}availability{Reset} for a guest/guests on the waiting list select
+[4] {Red}Quit{Reset}
 """
         )
     )
@@ -40,11 +41,11 @@ while True:
         while True:
             view_options = int(
                 input(
-                    """What would you like to view? 
-- View Reservations [1]
-- View Carry-out orders [2]
-- View Delivery orders [3]
-- Return to the main menu [4]
+                    f"""What would you like to view? 
+[1] View {Blue}Reservations{Reset}
+[2] View {Red}Carry-out{Reset} orders
+[3] View {Yellow}Delivery{Reset} orders
+[4] Return to the {Green}main menu{Reset}
 """
                 )
             )
@@ -52,20 +53,20 @@ while True:
                 cur.execute("SELECT * FROM Reservations")
                 for row in cur.fetchall():
                     print(
-                        f"""Name: {row[0]}, Party Count: {row[1]}
-Date: {row[2]}, Time: {row[3]}
-Order: {row[4]}
-Total: ${row[5]}
+                        f"""{Yellow}Name{Reset}: {row[0]}, {Red}Party Count{Reset}: {row[1]}
+{Green}Date{Reset}: {row[2]}, {Blue}Time{Reset}: {row[3]}
+{Yellow}Order{Reset}: {row[4]}
+{Green}Total{Reset}: ${row[5]}
 \n\n"""
                     )
             elif view_options == 2:
                 cur.execute("SELECT * FROM Carryout")
                 for row in cur.fetchall():
                     print(
-                        f"""Name: {row[0]}
-Pickup Time: {row[1]}
-Order: {row[2]}
-Total: ${row[3]}
+                        f"""{Yellow}Name{Reset}: {row[0]}
+{Red}Pickup Time{Reset}: {row[1]}
+{Blue}Order{Reset}: {row[2]}
+{Green}Total{Reset}: ${row[3]}
 \n\n"""
                     )
             elif view_options == 3:
