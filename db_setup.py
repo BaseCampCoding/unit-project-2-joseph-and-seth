@@ -147,7 +147,11 @@ outbacksh_list = [
     (73, "Pork Porterhouse", 14.99),
     (74, "New Zealand Lamb", 22.49),
     (75, "Homestyle Mashed Potatoes, Aussie Fries, Baked Potato, & Sweet Potato", 2.99),
-    (76, "Fresh Seasonal Mixed Veggies, Fresh Steamed Broccoli, & Sauteed Mushrooms", 2.99),
+    (
+        76,
+        "Fresh Seasonal Mixed Veggies, Fresh Steamed Broccoli, & Sauteed Mushrooms",
+        2.99,
+    ),
     (77, "Baked Potato & Chicken Tortilla Soup Cup", 4.49),
     (78, "Steakhouse Mac & Cheese", 4.99),
     (79, "Broccoli & Cheese", 3.99),
@@ -159,7 +163,6 @@ outbacksh_list = [
     (85, "Triple-Layer Carrot Cake", 6.99),
     (86, "Salted Caramel Cookie Skillet", 4.99),
     (87, "Double Chocolate or Seasonal Parfaits", 4.99),
-
 ]
 
 reservation_times = [
@@ -175,7 +178,7 @@ reservation_times = [
     ("11/30/2020", "11:00 p.m."),
 ]
 
-con = sqlite3.connect("restaraunt_1.db")
+con = sqlite3.connect("Chillis.db")
 cur = con.cursor()
 
 cur.execute(
@@ -204,7 +207,7 @@ con.commit()
 con.close()
 
 
-con = sqlite3.connect('restaurant_2.db')
+con = sqlite3.connect("Outback.db")
 cur = con.cursor()
 
 cur.execute(
