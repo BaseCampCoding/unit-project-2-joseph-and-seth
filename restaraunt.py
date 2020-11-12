@@ -1,5 +1,6 @@
 import sqlite3
-from functions import menu
+from functions import menu1
+from functions import menu2
 
 
 # Asks the user which restaurant they work at.
@@ -9,8 +10,8 @@ rc = int(
 - Chili's [1]
 - Outback Steakhouse [2]
 """
-        )
     )
+)
 
 if rc == 1:
     con = sqlite3.connect("Chilis.db")
@@ -97,8 +98,10 @@ Total: ${row[4]}
                 )
             )
             # Should allow the user be able to see the current menu or changes to the menu.
-            if choice == 1:
-                menu()
+            if choice == 1 and rc == 1:
+                menu1()
+            elif choice == 1 and rc == 2:
+                menu2()
                 # Should allow the user to change the menu.
             if choice == 2:
                 id_number = input("What is the ID of the item you are changing? ")
