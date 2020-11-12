@@ -1,4 +1,5 @@
 import sqlite3
+from functions import menu
 
 
 con = sqlite3.connect("restaraunt_1.db")
@@ -83,11 +84,9 @@ Total: ${row[4]}
             )
             # Should allow the user be able to see the current menu or changes to the menu.
             if choice == 1:
-                cur.execute("SELECT * FROM Menu")
-                for row in cur.fetchall():
-                    print(f"ID: {row[0]}, Item: {row[1]}, Price: {row[2]}")
-            # Should allow the user to change the menu.
-            elif choice == 2:
+                menu()
+                # Should allow the user to change the menu.
+            if choice == 2:
                 id_number = input("What is the ID of the item you are changing? ")
                 change_option = input("What value would you like to change? ")
                 # The user can change the item
@@ -96,7 +95,8 @@ Total: ${row[4]}
                         "What would you like to change this item's name to? "
                     )
                     cur.execute(
-                        "UPDATE Menu SET Item = ? WHERE ID = ?", [new_name, id_number]
+                        "UPDATE Menu SET Item = ? WHERE ID = ?",
+                        [new_name, id_number],
                     )
                     con.commit()
                 # The user can change the price
@@ -105,7 +105,8 @@ Total: ${row[4]}
                         "What would you like to change this item's price to? "
                     )
                     cur.execute(
-                        "UPDATE Menu SET Price = ? WHERE ID = ?", [new_price, id_number]
+                        "UPDATE Menu SET Price = ? WHERE ID = ?",
+                        [new_price, id_number],
                     )
                     con.commit()
                 # The user can add a new item, name of the item, and price of the item.
