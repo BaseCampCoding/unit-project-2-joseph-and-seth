@@ -9,6 +9,11 @@ from datetime import timedelta
 
 dates = {}
 items = []
+Blue = Fore.BLUE
+Red = Fore.RED
+Yellow = Fore.YELLOW
+Green = Fore.GREEN
+Reset = Style.RESET_ALL
 
 con = sqlite3.connect("restaraunt_1.db")
 cur = con.cursor()
@@ -20,12 +25,6 @@ def menu():
         print(
             f"{Fore.BLUE}ID{Style.RESET_ALL}: {row[0]}, {Fore.YELLOW}Item{Style.RESET_ALL}: {row[1]}, {Fore.GREEN}Price{Style.RESET_ALL}: {row[2]}"
         )
-
-
-def get_time():
-    now = datetime.now()
-    current_time = now.strftime("%H:%M")
-    return current_time
 
 
 def delivery_time():
@@ -52,9 +51,9 @@ def menu_options():
             items.append(item)
         print(f"\nYour total is currently {total:.2f}")
         choose_more = input("\nWould you like to add any more items?\n")
-        if choose_more.lower() == "y":
+        if choose_more.lower() == "y" or "yes":
             menu()
-        elif choose_more.lower() == "n":
+        elif choose_more.lower() == "n" or "no":
             break
         else:
             print("Please choose a valid option")
