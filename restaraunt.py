@@ -1,8 +1,22 @@
 import sqlite3
 
 
-con = sqlite3.connect("restaraunt_1.db")
-cur = con.cursor()
+# Asks the user which restaurant they work at.
+rc = int(
+    input(
+        """Select which restaurant you work at:
+- Chili's [1]
+- Outback Steakhouse [2]
+"""
+        )
+    )
+
+if rc == 1:
+    con = sqlite3.connect("Chilis.db")
+    cur = con.cursor()
+elif rc == 2:
+    con = sqlite3.connect("Outback.db")
+    cur = con.cursor()
 
 
 # Presents user with menu options of what they can do.
@@ -19,7 +33,7 @@ while True:
         )
     )
 
-    # Views the reservations in the queue.
+    # Views the reservations, carry-out orders, and delivery orders in the queue list.
     if action == 1:
         while True:
             view_options = int(
@@ -67,7 +81,7 @@ Total: ${row[4]}
                 print("Returning to the main menu.")
                 break
 
-    # If the user chooses menu they should have options of what they might want to do the the menu.
+    # If the user chooses menu they should have options of what they might want to do the menu.
     elif action == 2:
         while True:
             choice = int(
@@ -160,7 +174,7 @@ Total: ${row[4]}
         elif availability_choice == 3:
             print("Returning to the main menu.")
 
-    # Turns off the device.
+    # Exits the application.
     elif action == 4:
         print("Exiting Application.")
         break
