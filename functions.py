@@ -42,7 +42,12 @@ def menu_options1():
     menu1()
     total = 0
     while True:
-        id_choice = input("\nChoose the ID of the item you want to order.\n")
+        while True:
+            id_choice = input("\nChoose the ID of the item you want to order.\n")
+            if id_choice.isdigit():
+                break
+            else:
+                print("Please choose a valid ID.")
         sqlStatement = "SELECT Price FROM Menu WHERE ID = ?"
         cur.execute(sqlStatement, [id_choice])
         for price in cur.fetchall():
@@ -51,14 +56,17 @@ def menu_options1():
         for item in cur.fetchall():
             items.append(item)
         print(f"\nYour total is currently {total:.2f}")
-        choose_more = input("\nWould you like to add any more items?\n")
-        if choose_more.lower() == "y" or choose_more.lower() == "yes":
-            print("test")
-            menu1()
-        elif choose_more.lower() == "n" or choose_more.lower() == "no":
+        while True:
+            choose_more = input("\nWould you like to add any more items?\n")
+            if choose_more.lower() == "y" or choose_more.lower() == "yes":
+                menu1()
+                break
+            elif choose_more.lower() == "n" or choose_more.lower() == "no":
+                break
+            else:
+                print("Please choose a valid option")
+        if choose_more.lower() == "n" or choose_more.lower() == "no":
             break
-        else:
-            print("Please choose a valid option")
     return total
 
 
@@ -88,9 +96,9 @@ def menu_options2():
             items.append(item)
         print(f"\nYour total is currently {total:.2f}")
         choose_more = input("\nWould you like to add any more items?\n")
-        if choose_more.lower() == "y" or "yes":
+        if choose_more.lower() == "y" or choose_more.lower() == "yes":
             menu2()
-        elif choose_more.lower() == "n" or "no":
+        elif choose_more.lower() == "n" or choose_more.lower() == "no":
             break
         else:
             print("Please choose a valid option")
