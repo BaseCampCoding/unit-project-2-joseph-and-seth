@@ -170,8 +170,8 @@ while True:
             while True:
                 changed_availability = input(
                     """\nWhat would you like to set the availability to?
-    [1] Available
-    [2] Unavailable
+[1] Available
+[2] Unavailable
     \n"""
                 )
                 if changed_availability.isdigit():
