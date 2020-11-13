@@ -3,7 +3,7 @@ from classes import *
 import json
 import pickle
 
-print(f"Welcome to {Yellow}Food Line{Reset}! Home to all your restaraunt needs!")
+print(f"\nWelcome to {Yellow}Food Line{Reset}! Home to all your restaraunt needs!\n")
 rest_choice = int(
     input(
         f"""Which restaurant would you like to place an order at?
@@ -60,7 +60,7 @@ if choice == 1 and availability == (1,):
 
     cur.execute("DELETE FROM ReservationTimes WHERE Date = ?", [chosen_date])
 
-    chosen_time = input("\nWhat time would you like to schedule for?\n")
+    chosen_time = input(f"\nWhat {Blue}time{Reset} would you like to schedule for?\n")
     if rest_choice == 1:
         total = menu_options1()
     elif rest_choice == 2:
@@ -68,7 +68,8 @@ if choice == 1 and availability == (1,):
     order = json.dumps(items)
     reservation = Reservation(name, count, chosen_date2, chosen_time, order, total)
     print(
-        f"\nThank you for using {Yellow}Food Line{Reset}! Here is your order summary!")
+        f"\nThank you for using {Yellow}Food Line{Reset}! Here is your order summary!"
+    )
     print(reservation)
 
     cur.execute(
@@ -89,7 +90,8 @@ elif choice == 2:
     order = json.dumps(items)
     carryout = Carryout(name, time, order, total)
     print(
-        f"\nThank you for using {Yellow}Food Line{Reset}! Here is your order summary!")
+        f"\nThank you for using {Yellow}Food Line{Reset}! Here is your order summary!"
+    )
     print(carryout)
 
     cur.execute("INSERT INTO Carryout VALUES (?, ?, ?, ?)", (name, time, order, total))
@@ -105,7 +107,8 @@ elif choice == 3:
     order = json.dumps(items)
     delivery = Delivery(name, address, delivery_time, order, total)
     print(
-        f"\nThank you for using {Yellow}Food Line{Reset}! Here is your order summary!")
+        f"\nThank you for using {Yellow}Food Line{Reset}! Here is your order summary!"
+    )
     print(delivery)
     cur.execute(
         "INSERT INTO Delivery VALUES (?, ?, ?, ?, ?)",
