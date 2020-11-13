@@ -1,13 +1,13 @@
 # Food Line - Restaraunt App
 
 ## Table of Contents
-* ##### [General info](#general-info)
-* ##### [Technologies](#technologies)
-* ##### [Launch](#launch)
-* ##### [Features](#features)
-* ##### [To do:](#to-do)
-* ##### [Project Status](#project-status)
-* ##### [Inspiration](#inspiration)
+* ##### General info
+* ##### Technologies
+* ##### Launch
+* ##### Features
+* ##### To do:
+* ##### Project Status
+* ##### Inspiration
 
 
 
