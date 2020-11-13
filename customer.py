@@ -1,5 +1,7 @@
 from functions import *
+from classes import *
 import json
+import pickle
 
 print(f"Welcome to {Yellow}Food Line{Reset}! Home to all your restaraunt needs!")
 rest_choice = int(
@@ -64,16 +66,11 @@ if choice == 1 and availability == (1,):
     elif rest_choice == 2:
         total = menu_options2()
     order = json.dumps(items)
+    reservation = Reservation(name, count, chosen_date2, chosen_time, order, total)
     print(
-        f"\nThank you for using {Yellow}Food Line{Reset}! Here is your order summary!\n"
-    )
-    print(f"""
-{Yellow}Name{Reset}: {name}, {Red}Party Count{Reset}: {count}
-{Green}Date{Reset}: {chosen_date2}, {Blue}Time{Reset}: {chosen_time}
-{Yellow}Order{Reset}: {order}
-{Green}Total{Reset}: ${total}
-        """
-    )
+        f"\nThank you for using {Yellow}Food Line{Reset}! Here is your order summary!")
+    print(reservation)
+
     cur.execute(
         "INSERT INTO Reservations VALUES (?, ?, ?, ?, ?, ?)",
         (name, count, chosen_date2, chosen_time, order, total),
@@ -90,16 +87,10 @@ elif choice == 2:
     elif rest_choice == 2:
         total = menu_options2()
     order = json.dumps(items)
+    carryout = Carryout(name, time, order, total)
     print(
-        f"\nThank you for using {Yellow}Food Line{Reset}! Here is your order summary!\n"
-    )
-    print(
-        f"""{Yellow}Name{Reset}: {name}
-{Red}Time{Reset}: {time}
-{Blue}Order{Reset}: {order}
-{Green}Total{Reset}: ${total}
-    """
-    )
+        f"\nThank you for using {Yellow}Food Line{Reset}! Here is your order summary!")
+    print(carryout)
 
     cur.execute("INSERT INTO Carryout VALUES (?, ?, ?, ?)", (name, time, order, total))
     con.commit()
@@ -112,17 +103,10 @@ elif choice == 3:
     elif rest_choice == 2:
         total = menu_options2()
     order = json.dumps(items)
+    delivery = Delivery(name, address, delivery_time, order, total)
     print(
-        f"\nThank you for using {Yellow}Food Line{Reset}! Here is your order summary!\n"
-    )
-    print(
-        f"""{Yellow}Name{Reset}: {name}
-{Red}Address{Reset}: {address}
-{Blue}Estimated Delivery Time{Reset}: {delivery_time}
-{Yellow}Order{Reset}: {order}
-{Green}Total{Reset}: ${total:.2f}
-    """
-    )
+        f"\nThank you for using {Yellow}Food Line{Reset}! Here is your order summary!")
+    print(delivery)
     cur.execute(
         "INSERT INTO Delivery VALUES (?, ?, ?, ?, ?)",
         (name, address, delivery_time, order, total),
