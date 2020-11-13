@@ -105,8 +105,8 @@ while True:
                 menu2()
                 # Should allow the user to change the menu.
             if choice == 2:
-                id_number = input("What is the ID of the item you are changing? ")
-                change_option = input("What value would you like to change? ")
+                id_number = input("\nWhat is the ID of the item you are changing?\n")
+                change_option = input("\nWhat value would you like to change?\n")
                 # The user can change the item
                 if change_option.lower() == "item":
                     new_name = input(
@@ -120,7 +120,7 @@ while True:
                 # The user can change the price
                 elif change_option.lower() == "price":
                     new_price = input(
-                        "What would you like to change this item's price to? "
+                        "\nWhat would you like to change this item's price to?\n"
                     )
                     cur.execute(
                         "UPDATE Menu SET Price = ? WHERE ID = ?",
@@ -130,8 +130,12 @@ while True:
                 # The user can add a new item, name of the item, and price of the item.
             elif choice == 3:
                 item_id = input(f"What will be the {Blue}ID{Reset} of the new item?\n")
-                item_name = input(f"What will be the {Yellow}name{Reset} of the new item?\n")
-                item_price = input(f"What will be the new {Green}price{Reset} of the item?\n")
+                item_name = input(
+                    f"What will be the {Yellow}name{Reset} of the new item?\n"
+                )
+                item_price = input(
+                    f"What will be the new {Green}price{Reset} of the item?\n"
+                )
                 item_type = input(f"What {Red}type{Reset} of item is this?\n")
                 cur.execute(
                     "INSERT INTO Menu VALUES (?, ?, ?, ?)",
@@ -140,7 +144,9 @@ while True:
                 con.commit()
             # The user can delete an item.
             elif choice == 4:
-                del_item_id = input(f"What is the {Blue}ID{Reset} you want to delete?\n")
+                del_item_id = input(
+                    f"What is the {Blue}ID{Reset} you want to delete?\n"
+                )
                 cur.execute("DELETE FROM Menu WHERE ID = ?", [del_item_id])
                 con.commit()
             # The user can quit to the main menu.
@@ -164,9 +170,9 @@ while True:
             cur.execute("SELECT Available FROM Availability")
             availability = cur.fetchone()
             if availability == (1,):
-                print("\nReservations are currently available")
+                print(f"\nReservations are currently {Green}available{Reset}")
             else:
-                print("\nReservations are currently unavailable.")
+                print(f"\nReservations are currently {Red}unavailable{Reset}.")
             while True:
                 changed_availability = input(
                     """\nWhat would you like to set the availability to?
@@ -194,8 +200,10 @@ while True:
             cur.execute("SELECT * FROM ReservationTimes")
             for row in cur.fetchall():
                 print(f"Date: {row[0]}, Time: {row[1]}")
-            date = input("What date would you like to add to the reservation list? ")
-            time = input("What times would you like to add to the reservation list? ")
+            date = input("\nWhat date would you like to add to the reservation list?\n")
+            time = input(
+                "\nWhat times would you like to add to the reservation list?\n"
+            )
             cur.execute("INSERT INTO ReservationTimes VALUES (?, ?)", (date, time))
             con.commit()
         elif availability_choice == 3:
