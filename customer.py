@@ -5,7 +5,7 @@ print(f"Welcome to {Yellow}Food Line{Reset}! Home to all your restaraunt needs!"
 rest_choice = int(
     input(
         f"""Which restaurant would you like to place an order at?
-[1] {Red}Chilli's{Reset}
+[1] {Red}Chili's{Reset}
 [2] {Yellow}Outback Steakhouse{Reset}\n"""
     )
 )
@@ -23,7 +23,7 @@ else:
     print(f"Reservations are currently {Red}unavailable{Reset}.")
 choice = int(
     input(
-        f"""Would you like to:
+        f"""\nWould you like to:\n
 [1] Make a {Blue}reservation{Reset}
 [2] Order {Red}carry-out{Reset}
 [3] Schedule a {Yellow}delivery{Reset}
@@ -32,13 +32,19 @@ choice = int(
 )
 if choice == 1 and availability == (1,):
     name = input(f"\nWhat is the {Yellow}name{Reset} for this order?\n")
-    count = input(f"\nWhat is the {Red}size{Reset} of your party?\n")
+    while True:
+        count = input(f"\nWhat is the {Red}size{Reset} of your party?\n")
+        if count.isdigit():
+            count = int(count)
+            break
+        else:
+            print("Please input a valid party size!")
     print(f"\nHere are our {Green}available dates{Reset}.\n")
     cur.execute("SELECT Date FROM ReservationTimes GROUP BY Date")
     for row in cur.fetchall():
         print(f"{Green}Date{Reset}: {row[0]}")
 
-    chosen_date = input(f"\nWhat {Green}date{Reset} would you like to schedule for?\n")
+    chosen_date = input(f"\nWhich {Green}date{Reset} would you like to schedule for?\n")
     split_dates = chosen_date.split("/")
     chosen_date2 = date(int(split_dates[2]), int(split_dates[0]), int(split_dates[1]))
 
@@ -61,12 +67,12 @@ if choice == 1 and availability == (1,):
     print(
         f"\nThank you for using {Yellow}Food Line{Reset}! Here is your order summary!\n"
     )
-    print(
-        f"""{Yellow}Name{Reset}: {name}, {Red}Party Count{Reset}: {count}
+    print(f"""
+{Yellow}Name{Reset}: {name}, {Red}Party Count{Reset}: {count}
 {Green}Date{Reset}: {chosen_date2}, {Blue}Time{Reset}: {chosen_time}
 {Yellow}Order{Reset}: {order}
 {Green}Total{Reset}: ${total}
-    """
+        """
     )
     cur.execute(
         "INSERT INTO Reservations VALUES (?, ?, ?, ?, ?, ?)",
@@ -99,7 +105,7 @@ elif choice == 2:
     con.commit()
 elif choice == 3:
     name = input("What is the name for this order?\n")
-    address = input("What is the address you want to deliver to?\n")
+    address = input("\nWhat is the address you want to deliver to?\n")
     delivery_time = delivery_time()
     if rest_choice == 1:
         total = menu_options1()

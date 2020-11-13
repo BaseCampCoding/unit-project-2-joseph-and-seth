@@ -10,7 +10,7 @@ rc = int(
         f"""Select which {Blue}restaurant{Reset} you work at:
 [1] {Red}Chili's{Reset}
 [2] {Yellow}Outback Steakhouse{Reset}
-"""
+\n"""
     )
 )
 
@@ -24,15 +24,15 @@ elif rc == 2:
 
 # Presents user with menu options of what they can do.
 while True:
-    print(f"{Yellow}Food Line{Reset} Staff Menu")
+    print(f"\n{Yellow}Food Line{Reset} Staff Menu")
     action = int(
         input(
             f"""Would you like to:
-[1] View queued {Yellow}orders
+[1] View queued {Yellow}orders{Reset}
 [2] Change {Blue}menu{Reset} select
 [3] Check {Green}availability{Reset} for a guest/guests on the waiting list select
 [4] {Red}Quit{Reset}
-"""
+\n"""
         )
     )
 
@@ -41,12 +41,12 @@ while True:
         while True:
             view_options = int(
                 input(
-                    f"""What would you like to view? 
+                    f"""\nWhat would you like to view? 
 [1] View {Blue}Reservations{Reset}
 [2] View {Red}Carry-out{Reset} orders
 [3] View {Yellow}Delivery{Reset} orders
 [4] Return to the {Green}main menu{Reset}
-"""
+\n"""
                 )
             )
             if view_options == 1:
@@ -73,11 +73,11 @@ while True:
                 cur.execute("SELECT * FROM Delivery")
                 for row in cur.fetchall():
                     print(
-                        f"""Name: {row[0]}
-Destination: {row[1]}
-Estimated Delivery Time: {row[2]}
-Order: {row[3]}
-Total: ${row[4]}
+                        f"""{Yellow}Name{Reset}: {row[0]}
+{Green}Destination{Reset}: {row[1]}
+{Red}Estimated Delivery Time{Reset}: {row[2]}
+{Blue}Order{Reset}: {row[3]}
+{Green}Total{Reset}: ${row[4]}
 """
                     )
             elif view_options == 4:
@@ -89,13 +89,13 @@ Total: ${row[4]}
         while True:
             choice = int(
                 input(
-                    """What option would you like to select?:
-- View the current menu [1]
-- Change the current menu [2]
-- Add to the current menu [3]
-- Delete from the current menu [4]
-- Return to the main menu [5]
-"""
+                    f"""\nWhat option would you like to select?:
+[1] {Yellow}View{Reset} the current menu
+[2] {Green}Change{Reset} the current menu
+[3] {Blue}Add{Reset} to the current menu
+[4] {Red}Delete{Reset} from the current menu
+[5] {Yellow}Return{Reset} to the main menu
+\n"""
                 )
             )
             # Should allow the user be able to see the current menu or changes to the menu.
@@ -129,17 +129,18 @@ Total: ${row[4]}
                     con.commit()
                 # The user can add a new item, name of the item, and price of the item.
             elif choice == 3:
-                item_id = input("What will be the ID of the new item? ")
-                item_name = input("What will be the name of the new item? ")
-                item_price = input("What will be the new price of the item? ")
+                item_id = input(f"What will be the {Blue}ID{Reset} of the new item?\n")
+                item_name = input(f"What will be the {Yellow}name{Reset} of the new item?\n")
+                item_price = input(f"What will be the new {Green}price{Reset} of the item?\n")
+                item_type = input(f"What {Red}type{Reset} of item is this?\n")
                 cur.execute(
-                    "INSERT INTO Menu VALUES (?, ?, ?)",
-                    (item_id, item_name, item_price),
+                    "INSERT INTO Menu VALUES (?, ?, ?, ?)",
+                    (item_id, item_name, item_price, item_type),
                 )
                 con.commit()
             # The user can delete an item.
             elif choice == 4:
-                del_item_id = input("What is the ID you want to delete? ")
+                del_item_id = input(f"What is the {Blue}ID{Reset} you want to delete?\n")
                 cur.execute("DELETE FROM Menu WHERE ID = ?", [del_item_id])
                 con.commit()
             # The user can quit to the main menu.
@@ -152,33 +153,42 @@ Total: ${row[4]}
         # The user can change what times and dates are available and are removed from the list or added back.
         availability_choice = int(
             input(
-                """What would you like to change about availability?
-[1] Set Availability
-[2] Provide new available times
-[3] Return to the main menu
-"""
+                f"""\nWhat would you like to change about availability?
+[1] {Green}Set{Reset} Availability
+[2] {Blue}Provide{Reset} new available times
+[3] {Red}Return{Reset} to the main menu
+\n"""
             )
         )
         if availability_choice == 1:
             cur.execute("SELECT Available FROM Availability")
             availability = cur.fetchone()
             if availability == (1,):
-                print("Reservations are currently available")
+                print("\nReservations are currently available")
             else:
-                print("Reservations are currently unavailable.")
-            changed_availability = input(
-                "What would you like to set the availability to? "
-            )
-            if changed_availability.lower() == "available":
-                cur.execute("DELETE FROM Availability")
-                cur.execute("INSERT INTO Availability VALUES(1)")
-                con.commit()
-            elif changed_availability.lower() == "unavailable":
-                cur.execute("DELETE FROM Availability")
-                cur.execute("INSERT INTO Availability VALUES(0)")
-                con.commit()
-            else:
-                print("Please choose a valid option.")
+                print("\nReservations are currently unavailable.")
+            while True:
+                changed_availability = input(
+                    """\nWhat would you like to set the availability to?
+    [1] Available
+    [2] Unavailable
+    \n"""
+                )
+                if changed_availability.isdigit():
+                    changed_availability = int(changed_availability)
+
+                if changed_availability == 1:
+                    cur.execute("DELETE FROM Availability")
+                    cur.execute("INSERT INTO Availability VALUES(1)")
+                    con.commit()
+                    break
+                elif changed_availability == 2:
+                    cur.execute("DELETE FROM Availability")
+                    cur.execute("INSERT INTO Availability VALUES(0)")
+                    con.commit()
+                    break
+                else:
+                    print("\nPlease choose a valid option.\n")
         elif availability_choice == 2:
             print("Here are the currently available reservation times.")
             cur.execute("SELECT * FROM ReservationTimes")
@@ -193,5 +203,5 @@ Total: ${row[4]}
 
     # Exits the application.
     elif action == 4:
-        print("Exiting Application.")
+        print("\nExiting Application.")
         break
