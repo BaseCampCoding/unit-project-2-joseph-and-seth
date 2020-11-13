@@ -20,7 +20,8 @@ def menu1():
     con = sqlite3.connect("Chilis.db")
     cur = con.cursor()
     while True:
-            food_type = input(f"""\nWhat food category would you like to see?\n
+        food_type = input(
+            f"""\nWhat food category would you like to see?\n
 [1] {Yellow}Appetizers{Reset}
 [2] {Green}Salads{Reset}
 [3] {Blue}Sandwiches{Reset}
@@ -33,86 +34,134 @@ def menu1():
 [10] {Green}Kids Meals{Reset}
 [11] {Blue}Beverages{Reset}
 [12] {Red}Full Menu{Reset}
-\n""")
-            if food_type.isdigit():
-                food_type = int(food_type)
-                break
-            else:
-                print("Please select a valid option!")
+\n"""
+        )
+        if food_type.isdigit():
+            food_type = int(food_type)
+            break
+        else:
+            print("Please select a valid option!")
     if food_type == 1:
         print(f"\n{Red}Appetizers{Reset}")
-        print("============================================================================")
+        print(
+            "============================================================================"
+        )
         cur.execute("SELECT * FROM Menu WHERE Type='Appetizer'")
-        for row in cur.fetchall(): 
-            print(f"{Blue}ID{Reset}: {row[0]},\t {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}")
+        for row in cur.fetchall():
+            print(
+                f"{Blue}ID{Reset}: {row[0]}, {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}"
+            )
     elif food_type == 2:
         print(f"\n{Red}Salads{Reset}")
-        print("============================================================================")
+        print(
+            "============================================================================"
+        )
         cur.execute("SELECT * FROM Menu WHERE Type='Salad'")
         for row in cur.fetchall():
-            print(f"{Blue}ID{Reset}: {row[0]},\t {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}")
+            print(
+                f"{Blue}ID{Reset}: {row[0]}, {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}"
+            )
     elif food_type == 3:
         print(f"\n{Red}Sandwiches{Reset}")
-        print("============================================================================")
+        print(
+            "============================================================================"
+        )
         cur.execute("SELECT * FROM Menu WHERE Type='Sandwich'")
         for row in cur.fetchall():
-            print(f"{Blue}ID{Reset}: {row[0]},\t {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}")
+            print(
+                f"{Blue}ID{Reset}: {row[0]}, {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}"
+            )
     elif food_type == 4:
         print(f"\n{Red}Meats{Reset}")
-        print("============================================================================")
+        print(
+            "============================================================================"
+        )
         cur.execute("SELECT * FROM Menu WHERE Type='Meat'")
         for row in cur.fetchall():
-            print(f"{Blue}ID{Reset}: {row[0]},\t {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}")
+            print(
+                f"{Blue}ID{Reset}: {row[0]}, {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}"
+            )
     elif food_type == 5:
         print(f"\n{Red}Mexican Food{Reset}")
-        print("============================================================================")
+        print(
+            "============================================================================"
+        )
         cur.execute("SELECT * FROM Menu WHERE Type='Mexican'")
         for row in cur.fetchall():
-            print(f"{Blue}ID{Reset}: {row[0]},\t {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}")
+            print(
+                f"{Blue}ID{Reset}: {row[0]}, {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}"
+            )
     elif food_type == 6:
         print(f"\n{Red}Chicken{Reset}")
-        print("============================================================================")
+        print(
+            "============================================================================"
+        )
         cur.execute("SELECT * FROM Menu WHERE Type='Chicken'")
         for row in cur.fetchall():
-            print(f"{Blue}ID{Reset}: {row[0]},\t {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}")
+            print(
+                f"{Blue}ID{Reset}: {row[0]}, {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}"
+            )
     elif food_type == 7:
         print(f"\n{Red}Combos{Reset}")
-        print("============================================================================")
+        print(
+            "============================================================================"
+        )
         cur.execute("SELECT * FROM Menu WHERE Type='Combo'")
         for row in cur.fetchall():
-            print(f"{Blue}ID{Reset}: {row[0]},\t {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}")
+            print(
+                f"{Blue}ID{Reset}: {row[0]}, {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}"
+            )
     elif food_type == 8:
         print(f"\n{Red}Sides{Reset}")
-        print("============================================================================")
+        print(
+            "============================================================================"
+        )
         cur.execute("SELECT * FROM Menu WHERE Type='Sides'")
         for row in cur.fetchall():
-            print(f"{Blue}ID{Reset}: {row[0]},\t {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}")
+            print(
+                f"{Blue}ID{Reset}: {row[0]}, {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}"
+            )
     elif food_type == 9:
         print(f"\n{Red}Desserts{Reset}")
-        print("============================================================================")
+        print(
+            "============================================================================"
+        )
         cur.execute("SELECT * FROM Menu WHERE Type='Dessert'")
         for row in cur.fetchall():
-            print(f"{Blue}ID{Reset}: {row[0]},\t {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}")
+            print(
+                f"{Blue}ID{Reset}: {row[0]}, {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}"
+            )
     elif food_type == 10:
         print(f"\n{Red}Kid's Meals{Reset}")
-        print("============================================================================")
+        print(
+            "============================================================================"
+        )
         cur.execute("SELECT * FROM Menu WHERE Type='Kids Meals'")
         for row in cur.fetchall():
-            print(f"{Blue}ID{Reset}: {row[0]},\t {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}")
+            print(
+                f"{Blue}ID{Reset}: {row[0]}, {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}"
+            )
     elif food_type == 11:
         print(f"\n{Red}Beverages{Reset}")
-        print("============================================================================")
+        print(
+            "============================================================================"
+        )
         cur.execute("SELECT * FROM Menu WHERE Type='Beverage'")
         for row in cur.fetchall():
-            print(f"{Blue}ID{Reset}: {row[0]},\t {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}")
+            print(
+                f"{Blue}ID{Reset}: {row[0]}, {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}"
+            )
     elif food_type == 12:
         print(f"\n{Red}Full Menu{Reset}")
-        print("============================================================================")
+        print(
+            "============================================================================"
+        )
         cur.execute("SELECT * FROM Menu")
         for row in cur.fetchall():
-            print(f"{Blue}ID{Reset}: {row[0]},\t {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}")
+            print(
+                f"{Blue}ID{Reset}: {row[0]}, {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}"
+            )
     print("")
-    
 
 
 def menu_options1():
@@ -153,7 +202,8 @@ def menu2():
     con = sqlite3.connect("Outback.db")
     cur = con.cursor()
     while True:
-            food_type = input(f"""\nWhat food category would you like to see?\n
+        food_type = input(
+            f"""\nWhat food category would you like to see?\n
 [1] {Yellow}Appetizers{Reset}
 [2] {Green}Soups{Reset}
 [3] {Blue}Salads{Reset}
@@ -166,84 +216,133 @@ def menu2():
 [10] {Green}Sides{Reset}
 [11] {Blue}Desserts{Reset}
 [12] {Red}Full Menu{Reset}
-\n""")
-            if food_type.isdigit():
-                food_type = int(food_type)
-                break
-            else:
-                print("Please select a valid option!")
+\n"""
+        )
+        if food_type.isdigit():
+            food_type = int(food_type)
+            break
+        else:
+            print("Please select a valid option!")
     if food_type == 1:
         print(f"\n{Red}Appetizers{Reset}")
-        print("============================================================================")
+        print(
+            "============================================================================"
+        )
         cur.execute("SELECT * FROM Menu WHERE Type='Appetizer'")
         for row in cur.fetchall():
-            print(f"{Blue}ID{Reset}: {row[0]},\t {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}")
+            print(
+                f"{Blue}ID{Reset}: {row[0]}, {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}"
+            )
     elif food_type == 2:
         print(f"\n{Red}Soups{Reset}")
-        print("============================================================================")
+        print(
+            "============================================================================"
+        )
         cur.execute("SELECT * FROM Menu WHERE Type='Soup'")
         for row in cur.fetchall():
-            print(f"{Blue}ID{Reset}: {row[0]},\t {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}")
+            print(
+                f"{Blue}ID{Reset}: {row[0]}, {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}"
+            )
     elif food_type == 3:
         print(f"\n{Red}Salads{Reset}")
-        print("============================================================================")
+        print(
+            "============================================================================"
+        )
         cur.execute("SELECT * FROM Menu WHERE Type='Salad'")
         for row in cur.fetchall():
-            print(f"{Blue}ID{Reset}: {row[0]},\t {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}")
+            print(
+                f"{Blue}ID{Reset}: {row[0]}, {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}"
+            )
     elif food_type == 4:
         print(f"\n{Red}Steaks{Reset}")
-        print("============================================================================")
+        print(
+            "============================================================================"
+        )
         cur.execute("SELECT * FROM Menu WHERE Type='Steak'")
         for row in cur.fetchall():
-            print(f"{Blue}ID{Reset}: {row[0]},\t {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}")
+            print(
+                f"{Blue}ID{Reset}: {row[0]}, {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}"
+            )
     elif food_type == 5:
         print(f"\n{Red}Seafood{Reset}")
-        print("============================================================================")
+        print(
+            "============================================================================"
+        )
         cur.execute("SELECT * FROM Menu WHERE Type='Seafood'")
         for row in cur.fetchall():
-            print(f"{Blue}ID{Reset}: {row[0]},\t {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}")
+            print(
+                f"{Blue}ID{Reset}: {row[0]}, {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}"
+            )
     elif food_type == 6:
         print(f"\n{Red}Tacos{Reset}")
-        print("============================================================================")
+        print(
+            "============================================================================"
+        )
         cur.execute("SELECT * FROM Menu WHERE Type='Taco'")
         for row in cur.fetchall():
-            print(f"{Blue}ID{Reset}: {row[0]},\t {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}")
+            print(
+                f"{Blue}ID{Reset}: {row[0]}, {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}"
+            )
     elif food_type == 7:
         print(f"\n{Red}Sandwiches{Reset}")
-        print("============================================================================")
+        print(
+            "============================================================================"
+        )
         cur.execute("SELECT * FROM Menu WHERE Type='Sandwich'")
         for row in cur.fetchall():
-            print(f"{Blue}ID{Reset}: {row[0]},\t {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}")
+            print(
+                f"{Blue}ID{Reset}: {row[0]}, {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}"
+            )
     elif food_type == 8:
         print(f"\n{Red}Chicken{Reset}")
-        print("============================================================================")
+        print(
+            "============================================================================"
+        )
         cur.execute("SELECT * FROM Menu WHERE Type='Chicken'")
         for row in cur.fetchall():
-            print(f"{Blue}ID{Reset}: {row[0]},\t {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}")
+            print(
+                f"{Blue}ID{Reset}: {row[0]}, {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}"
+            )
     elif food_type == 9:
         print(f"\n{Red}Meat{Reset}")
-        print("============================================================================")
+        print(
+            "============================================================================"
+        )
         cur.execute("SELECT * FROM Menu WHERE Type='Meat'")
         for row in cur.fetchall():
-            print(f"{Blue}ID{Reset}: {row[0]},\t {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}")
+            print(
+                f"{Blue}ID{Reset}: {row[0]}, {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}"
+            )
     elif food_type == 10:
         print(f"\n{Red}Sides{Reset}")
-        print("============================================================================")
+        print(
+            "============================================================================"
+        )
         cur.execute("SELECT * FROM Menu WHERE Type='Side'")
         for row in cur.fetchall():
-            print(f"{Blue}ID{Reset}: {row[0]},\t {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}")
+            print(
+                f"{Blue}ID{Reset}: {row[0]}, {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}"
+            )
     elif food_type == 11:
         print(f"\n{Red}Desserts{Reset}")
-        print("============================================================================")
+        print(
+            "============================================================================"
+        )
         cur.execute("SELECT * FROM Menu WHERE Type='Dessert'")
         for row in cur.fetchall():
-            print(f"{Blue}ID{Reset}: {row[0]},\t {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}")
+            print(
+                f"{Blue}ID{Reset}: {row[0]}, {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}"
+            )
     elif food_type == 12:
         print(f"\n{Red}Full Menu{Reset}")
-        print("============================================================================")
+        print(
+            "============================================================================"
+        )
         cur.execute("SELECT * FROM Menu")
         for row in cur.fetchall():
-            print(f"{Blue}ID{Reset}: {row[0]},\t {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}")
+            print(
+                f"{Blue}ID{Reset}: {row[0]}, {Yellow}Item{Reset}: {row[1]}, {Green}Price{Reset}: ${row[2]}"
+            )
     print("")
 
 
@@ -270,7 +369,7 @@ def menu_options2():
         while True:
             choose_more = input("\nWould you like to add any more items?\n")
             if choose_more.lower() == "y" or choose_more.lower() == "yes":
-                menu1()
+                menu2()
                 break
             elif choose_more.lower() == "n" or choose_more.lower() == "no":
                 break
